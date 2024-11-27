@@ -2,6 +2,7 @@ package org.ldv.savonapi.controller
 
 import org.ldv.savonapi.model.dao.ExempleDAO
 import org.ldv.savonapi.model.entity.Exemple
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.*
  * @param exempleDAO DAO pour accéder à la base de données des entités Exemple.
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/api-savon/v1/exemples")
-class ExempleController(private val exempleDAO: ExempleDAO) {
+class ExempleController( @Autowired private val exempleDAO: ExempleDAO) {
 
     /**
      * Récupère la liste de tous les exemples.
@@ -88,3 +90,4 @@ class ExempleController(private val exempleDAO: ExempleDAO) {
         }
     }
 }
+
