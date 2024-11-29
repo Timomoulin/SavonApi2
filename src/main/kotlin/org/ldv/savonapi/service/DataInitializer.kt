@@ -89,7 +89,7 @@ class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO:
                 id = 9,
                 nom = "Séchage"
             )
-            val liste= mutableListOf(iode,ins,douceur,lavant,volMousse,tenueMousse,solubilite,sechage)
+            val liste= mutableListOf(iode,ins,douceur,lavant,volMousse,tenueMousse,durete,solubilite,sechage)
             caracteristiqueDAO.saveAll(liste)
         }
         if (mentionDAO.count() == 0L) {

@@ -1,5 +1,7 @@
 package org.ldv.savonapi.model.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 
 
@@ -14,8 +16,9 @@ class Mention(
     var noteMax: Float,
     @ManyToOne
     @JoinColumn(name = "caracteristique_id")
+    @JsonIgnore
     var caracteristique: Caracteristique? = null,
-
+    @JsonIgnore
     @OneToMany(mappedBy = "mention", cascade = [CascadeType.REMOVE], orphanRemoval = true)
     var resultats: MutableList<Resultat> = mutableListOf()
 

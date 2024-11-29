@@ -1,5 +1,7 @@
 package org.ldv.savonapi.model.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 
 @Entity
@@ -19,7 +21,8 @@ class Ingredient(
     var solubilite:Float,
     var sechage:Float,
     var estCorpsGras:Boolean=true,
-    @OneToMany(mappedBy = "ingredient", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "ingredient", cascade = [CascadeType.PERSIST,CascadeType.REMOVE], orphanRemoval = true)
     var ligneIngredients: MutableList<LigneIngredient> = mutableListOf()
 
 ) {

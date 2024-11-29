@@ -24,8 +24,8 @@ class Recette(
 
 ) {
     fun calculNonPondere() {
-        val ins: Double = this.ligneIngredients.sumOf { it.ingredient!!.ins.toDouble() }
-        val iode: Double = this.ligneIngredients.sumOf { it.ingredient!!.iode.toDouble() }
+        val ins: Double = this.ligneIngredients.sumOf { it.ingredient!!.ins *it.pourcentage/100.toDouble() }
+        val iode: Double = this.ligneIngredients.sumOf { it.ingredient!!.iode *it.pourcentage/100.toDouble() }
         this.resultats.find { it.caracteristique!!.nom == "Iode" }!!.score = iode.toFloat()
         this.resultats.find { it.caracteristique!!.nom == "Indice INS" }!!.score = ins.toFloat()
     }

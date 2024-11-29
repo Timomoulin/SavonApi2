@@ -1,5 +1,7 @@
 package org.ldv.savonapi.model.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.JoinColumn
@@ -21,6 +23,7 @@ class LigneIngredient (
     @ManyToOne
     @MapsId("recetteId")
     @JoinColumn(name = "recette_id")
+    @JsonIgnore
     var recette: Recette? = null
 
 ) {

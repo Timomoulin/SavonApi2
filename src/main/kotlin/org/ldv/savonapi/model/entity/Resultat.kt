@@ -1,5 +1,7 @@
 package org.ldv.savonapi.model.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.JoinColumn
@@ -15,6 +17,7 @@ class Resultat (
     @ManyToOne
     @JoinColumn(name = "recette_id")
     @MapsId("recetteId")
+    @JsonIgnore
     var recette: Recette? = null,
     @ManyToOne
     @MapsId("caracteristiqueId")

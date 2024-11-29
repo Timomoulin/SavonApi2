@@ -11,6 +11,6 @@ class RecetteFormDTO (
     var concentrationAlcalin: Float,
     var qteAlcalin: Float,
     var alcalinEstSolide: Boolean,
-    var ligneIngredients: MutableList<LigneIngredient> = mutableListOf(),
+    var ligneIngredients: MutableList<LigneIngredientDTO> = mutableListOf(),
 ) {
 }
