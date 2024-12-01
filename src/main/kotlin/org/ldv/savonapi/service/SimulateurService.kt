@@ -10,6 +10,16 @@ import org.ldv.savonapi.model.id.LigneIngredientId
 import org.ldv.savonapi.model.id.ResultatId
 import org.springframework.stereotype.Service
 
+/**
+ * Service pour gérer la simulation et la création de recettes de savon.
+ *
+ * @property caracteristiqueDAO DAO pour accéder aux caractéristiques.
+ * @property recetteDAO DAO pour accéder aux recettes.
+ * @property ingredientDAO DAO pour accéder aux ingrédients.
+ * @property ligneIngredientDAO DAO pour gérer les lignes d'ingrédients.
+ * @property mentionDAO DAO pour accéder aux mentions.
+ * @property resultatDAO DAO pour accéder aux résultats.
+ */
 @Service
 class SimulateurService(
     val caracteristiqueDAO: CaracteristiqueDAO,
@@ -20,6 +30,12 @@ class SimulateurService(
     val resultatDAO: ResultatDAO
 ) {
 
+    /**
+     * Convertit un DTO de recette en une entité `Recette`, la sauvegarde, et génère les résultats associés.
+     *
+     * @param recetteFormDTO DTO contenant les informations de la recette.
+     * @return La recette sauvegardée avec ses lignes d'ingrédients et résultats associés.
+     */
     fun toRecette(recetteFormDTO: RecetteFormDTO): Recette {
         var recette = Recette(
             null,
@@ -29,44 +45,72 @@ class SimulateurService(
             0f,
             recetteFormDTO.avecSoude,
             recetteFormDTO.concentrationAlcalin,
-            recetteFormDTO.qteAlcalin,
+            0f,
             recetteFormDTO.alcalinEstSolide,
         )
-        recette=recetteDAO.save(recette)
-        for (ligneDTO in recetteFormDTO.ligneIngredients){
-            val ligne= this.ligneDTOToLigne(ligneDTO,recette)
+        recette = recetteDAO.save(recette)
+        for (ligneDTO in recetteFormDTO.ligneIngredients) {
+            val ligne = this.ligneDTOToLigne(ligneDTO, recette)
             recette.ligneIngredients.add(ligne)
         }
 
-        recette.resultats.addAll(this.creationResultat(recette))
+        recette.resultats.addAll(this.createResultat(recette))
         recette.calculPondere()
         recette.calculNonPondere()
-        //TODO qteEau
+        recette.calculQteAlcalin()
+        recette.calculApportEau()
+
         ligneIngredientDAO.saveAll(recette.ligneIngredients)
         this.assignMentionsToResults(recette)
         resultatDAO.saveAll(recette.resultats)
+
         return recetteDAO.save(recette)
     }
 
 
-fun ligneDTOToLigne( ligneIngredientDTO: LigneIngredientDTO,recette: Recette):LigneIngredient{
-    val ingredient = ingredientDAO.findById(ligneIngredientDTO.ingredientId)
-    val ligneIngredientId = LigneIngredientId(ligneIngredientDTO.ingredientId, recette.id!!)
-    val savedLigne= LigneIngredient(ligneIngredientId,ligneIngredientDTO.quantite,ligneIngredientDTO.pourcentage,ingredient.get(),recette)
-    return savedLigne;
-}
+    /**
+     * Convertit un DTO de ligne d'ingrédient en une entité `LigneIngredient` associée à une recette.
+     *
+     * @param ligneIngredientDTO DTO contenant les informations de la ligne d'ingrédient.
+     * @param recette La recette associée à la ligne d'ingrédient.
+     * @return Une entité `LigneIngredient` prête à être sauvegardée.
+     */
+    fun ligneDTOToLigne(ligneIngredientDTO: LigneIngredientDTO, recette: Recette): LigneIngredient {
+        val ingredient = ingredientDAO.findById(ligneIngredientDTO.ingredientId)
+        val ligneIngredientId = LigneIngredientId(ligneIngredientDTO.ingredientId, recette.id!!)
+        val savedLigne = LigneIngredient(
+            ligneIngredientId,
+            ligneIngredientDTO.quantite,
+            ligneIngredientDTO.pourcentage,
+            ingredient.get(),
+            recette
+        )
+        return savedLigne
+    }
 
-    fun creationResultat(recette: Recette): List<Resultat> {
+    /**
+     * Crée une liste de résultats pour une recette donnée, associant chaque caractéristique à un score initial de 0.
+     *
+     * @param recette La recette pour laquelle les résultats sont générés.
+     * @return Une liste de résultats associés à la recette.
+     */
+    fun createResultat(recette: Recette): List<Resultat> {
         val resultats: MutableList<Resultat> = mutableListOf()
         val caracteristique = caracteristiqueDAO.findAll()
 
         for (c in caracteristique) {
-            resultats.add(Resultat(resultatId = ResultatId(c.id!!, recette.id!!), 0f,recette,c))
+            resultats.add(Resultat(resultatId = ResultatId(c.id!!, recette.id!!), 0f, recette, c))
         }
         return resultats
     }
 
-    fun assignMentionsToResults(recette: Recette):Recette {
+    /**
+     * Associe une mention à chaque résultat d'une recette en fonction du score et de la caractéristique.
+     *
+     * @param recette La recette dont les résultats doivent être mis à jour.
+     * @return La recette mise à jour avec les mentions associées à ses résultats.
+     */
+    fun assignMentionsToResults(recette: Recette): Recette {
         recette.resultats.forEach { resultat ->
             val caracteristique = resultat.caracteristique
 
@@ -88,4 +132,5 @@ fun ligneDTOToLigne( ligneIngredientDTO: LigneIngredientDTO,recette: Recette):Li
         return recette
     }
 
-    }
+
+}

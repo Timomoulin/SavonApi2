@@ -9,7 +9,6 @@ class RecetteFormDTO (
     var surgraissage: Float,
     var avecSoude: Boolean,
     var concentrationAlcalin: Float,
-    var qteAlcalin: Float,
     var alcalinEstSolide: Boolean,
     var ligneIngredients: MutableList<LigneIngredientDTO> = mutableListOf(),
 ) {

@@ -17,6 +17,7 @@ class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO:
                 nom = "Coco",
                 iode = 9f,
                 ins = 248f,
+                sapo = 257f,
                 volMousse = 13.326f,
                 tenueMousse = 9.560f,
                 lavant = 14.462f,
@@ -31,6 +32,7 @@ class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO:
                 nom = "Olive",
                 iode = 78f,
                 ins = 111f,
+                sapo = 189f,
                 lavant = 10.192f,
                 volMousse = 9.838f,
                 tenueMousse = 9.152f,
@@ -103,41 +105,43 @@ class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO:
                 when (caracteristique.nom) {
                     "Iode" -> {
                         mentions.add(Mention(label = "Très faible", noteMin = 0f, noteMax = 30f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Faible", noteMin = 31f, noteMax = 70f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Élevé", noteMin = 71f, noteMax = 100f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Faible", noteMin = 30f, noteMax = 70f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Élevé", noteMin = 70f, noteMax = 100f, caracteristique = caracteristique))
                     }
                     "Indice INS" -> {
                         mentions.add(Mention(label = "Faible", noteMin = 0f, noteMax = 100f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Optimal", noteMin = 101f, noteMax = 160f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Trop élevé", noteMin = 161f, noteMax = 200f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Optimal", noteMin = 100f, noteMax = 160f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Trop élevé", noteMin = 160f, noteMax = 200f, caracteristique = caracteristique))
                     }
                     "Douceur" -> {
                         mentions.add(Mention(label = "Insuffisante", noteMin = 0f, noteMax = 5f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Bonne", noteMin = 6f, noteMax = 10f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Bonne", noteMin = 5f, noteMax = 10f, caracteristique = caracteristique))
                     }
                     "Lavant" -> {
                         mentions.add(Mention(label = "Faible", noteMin = 0f, noteMax = 7f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Excellent", noteMin = 8f, noteMax = 15f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Excellent", noteMin = 7f, noteMax = 15f, caracteristique = caracteristique))
                     }
                     "Volume de mousse" -> {
                         mentions.add(Mention(label = "Faible", noteMin = 0f, noteMax = 8f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Optimal", noteMin = 9f, noteMax = 15f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Optimal", noteMin = 8f, noteMax = 15f, caracteristique = caracteristique))
                     }
                     "Tenue de mousse" -> {
                         mentions.add(Mention(label = "Peu stable", noteMin = 0f, noteMax = 5f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Stable", noteMin = 6f, noteMax = 10f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Stable", noteMin = 5f, noteMax = 10f, caracteristique = caracteristique))
                     }
                     "Dureté" -> {
                         mentions.add(Mention(label = "Mou", noteMin = 0f, noteMax = 5f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Dur", noteMin = 6f, noteMax = 10f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Dur", noteMin = 5f, noteMax = 10f, caracteristique = caracteristique))
                     }
                     "Solubilité" -> {
                         mentions.add(Mention(label = "Faible", noteMin = 0f, noteMax = 5f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Bonne", noteMin = 6f, noteMax = 10f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Moyenne", noteMin = 5f, noteMax = 10f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Forte", noteMin = 10f, noteMax = 15f, caracteristique = caracteristique))
                     }
                     "Séchage" -> {
                         mentions.add(Mention(label = "Lent", noteMin = 0f, noteMax = 5f, caracteristique = caracteristique))
-                        mentions.add(Mention(label = "Rapide", noteMin = 6f, noteMax = 10f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Moyen", noteMin = 5f, noteMax = 10f, caracteristique = caracteristique))
+                        mentions.add(Mention(label = "Rapide", noteMin = 10f, noteMax = 15f, caracteristique = caracteristique))
                     }
                 }
             }

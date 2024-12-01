@@ -1,6 +1,7 @@
 package org.ldv.savonapi.model.entity
 
 import jakarta.persistence.*
+import org.ldv.savonapi.dto.RecetteFormDTO
 
 @Entity
 class Recette(
@@ -11,7 +12,7 @@ class Recette(
     var tite: String,
     var description: String,
     var surgraissage: Float,
-    var qteEau: Float,
+    var apportEnEau: Float,
     var avecSoude: Boolean,
     var concentrationAlcalin: Float,
     var qteAlcalin: Float,
@@ -57,6 +58,34 @@ class Recette(
         this.resultats.find { it.caracteristique!!.nom == "Dureté" }!!.score = durete.toFloat()
         this.resultats.find { it.caracteristique!!.nom == "Solubilité" }!!.score = solubilite.toFloat()
         this.resultats.find { it.caracteristique!!.nom == "Séchage" }!!.score = sechage.toFloat()
+    }
+
+    fun calculQteAlcalin(){
+
+        var qteAlcalinNormal =0.0
+        if (this.avecSoude){
+            qteAlcalinNormal = this.ligneIngredients.sumOf { (it.quantite * it.ingredient!!.sapo) *(40.0/56/1000) }
+
+        }
+        else{
+            qteAlcalinNormal = this.ligneIngredients.sumOf { ((it.quantite * it.ingredient!!.sapo)/1000.0) }
+        }
+
+        var qteAlcalin = qteAlcalinNormal / (concentrationAlcalin/100)
+        qteAlcalin = qteAlcalin - qteAlcalin * (surgraissage/100)
+        this.qteAlcalin=qteAlcalin.toFloat()
+
+    }
+
+    /**
+     * Calcule l'apport en eau fourni par l'agent alcalin dans la recette.
+     *
+     * L'apport en eau est déterminé en fonction de la concentration d'alcalin et de sa quantité.
+     */
+    fun calculApportEau() {
+        val concentrationEau = (100 - this.concentrationAlcalin) / 100
+        val apportEau = this.qteAlcalin * concentrationEau
+        this.apportEnEau= apportEau
     }
 
 }

@@ -13,6 +13,7 @@ class Ingredient(
     var nom:String,
     var iode:Float,
     var ins:Float,
+    var sapo:Float,
     var volMousse:Float,
     var tenueMousse:Float,
     var douceur:Float,
