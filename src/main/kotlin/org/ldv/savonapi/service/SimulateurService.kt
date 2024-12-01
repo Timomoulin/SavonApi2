@@ -38,7 +38,7 @@ class SimulateurService(
      */
     fun toRecette(recetteFormDTO: RecetteFormDTO): Recette {
         var recette = Recette(
-            null,
+            recetteFormDTO.id,
             recetteFormDTO.tite,
             recetteFormDTO.description,
             recetteFormDTO.surgraissage,
@@ -46,9 +46,10 @@ class SimulateurService(
             recetteFormDTO.avecSoude,
             recetteFormDTO.concentrationAlcalin,
             0f,
-            recetteFormDTO.alcalinEstSolide,
+
         )
         recette = recetteDAO.save(recette)
+
         for (ligneDTO in recetteFormDTO.ligneIngredients) {
             val ligne = this.ligneDTOToLigne(ligneDTO, recette)
             recette.ligneIngredients.add(ligne)
