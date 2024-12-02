@@ -1,7 +1,6 @@
 package org.ldv.savonapi.model.entity
 
 import jakarta.persistence.*
-import org.ldv.savonapi.dto.RecetteFormDTO
 
 @Entity
 class Recette(
@@ -9,7 +8,7 @@ class Recette(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null,
-    var tite: String,
+    var titre: String,
     var description: String,
     var surgraissage: Float,
     var apportEnEau: Float,

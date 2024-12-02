@@ -14,6 +14,7 @@ class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO:
         //Pour importer les ingredients
         if (ingredientDAO.count() == 0L) { // Éviter les doublons
             val coco = Ingredient(
+                id = 1,
                 nom = "Coco",
                 iode = 9f,
                 ins = 248f,
@@ -29,6 +30,7 @@ class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO:
             )
 
             val olive = Ingredient(
+                id = 2,
                 nom = "Olive",
                 iode = 78f,
                 ins = 111f,
@@ -42,7 +44,7 @@ class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO:
                 sechage = 10.194f,
                 estCorpsGras = true
             )
-            var ingredients = listOf<Ingredient>(olive,coco)
+            var ingredients = listOf<Ingredient>(coco,olive)
             ingredientDAO.saveAll(ingredients)
         }
         if (caracteristiqueDAO.count() == 0L) {
