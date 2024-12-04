@@ -51,11 +51,11 @@ class SimulateurService(
         recette = recetteDAO.save(recette)
 
         for (ligneDTO in recetteFormDTO.ligneIngredients) {
-            val ligne = this.ligneDTOToLigne(ligneDTO, recette)
+            val ligne = this.toLigne(ligneDTO, recette)
             recette.ligneIngredients.add(ligne)
         }
 
-        recette.resultats.addAll(this.createResultat(recette))
+        recette.resultats.addAll(this.createResultats(recette))
         recette.calculPondere()
         recette.calculNonPondere()
         recette.calculQteAlcalin()
@@ -76,7 +76,7 @@ class SimulateurService(
      * @param recette La recette associée à la ligne d'ingrédient.
      * @return Une entité `LigneIngredient` prête à être sauvegardée.
      */
-    fun ligneDTOToLigne(ligneIngredientDTO: LigneIngredientDTO, recette: Recette): LigneIngredient {
+    fun toLigne(ligneIngredientDTO: LigneIngredientDTO, recette: Recette): LigneIngredient {
         val ingredient = ingredientDAO.findById(ligneIngredientDTO.ingredientId)
         val ligneIngredientId = LigneIngredientId(ligneIngredientDTO.ingredientId, recette.id!!)
         val savedLigne = LigneIngredient(
@@ -95,11 +95,11 @@ class SimulateurService(
      * @param recette La recette pour laquelle les résultats sont générés.
      * @return Une liste de résultats associés à la recette.
      */
-    fun createResultat(recette: Recette): List<Resultat> {
+    fun createResultats(recette: Recette): List<Resultat> {
         val resultats: MutableList<Resultat> = mutableListOf()
-        val caracteristique = caracteristiqueDAO.findAll()
+        val caracteristiques = caracteristiqueDAO.findAll()
 
-        for (c in caracteristique) {
+        for (c in caracteristiques) {
             resultats.add(Resultat(resultatId = ResultatId(c.id!!, recette.id!!), 0f, recette, c))
         }
         return resultats
