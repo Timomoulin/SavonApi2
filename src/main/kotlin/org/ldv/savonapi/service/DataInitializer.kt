@@ -1,15 +1,12 @@
 package org.ldv.savonapi.service
-import org.ldv.savonapi.model.dao.CaracteristiqueDAO
-import org.ldv.savonapi.model.dao.IngredientDAO
-import org.ldv.savonapi.model.dao.MentionDAO
-import org.ldv.savonapi.model.entity.Caracteristique
-import org.ldv.savonapi.model.entity.Ingredient
-import org.ldv.savonapi.model.entity.Mention
+import org.ldv.savonapi.model.dao.*
+import org.ldv.savonapi.model.entity.*
+import org.ldv.savonapi.model.id.ResultatId
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 @Component
-class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO: CaracteristiqueDAO,val mentionDAO: MentionDAO) : CommandLineRunner {
+class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO: CaracteristiqueDAO,val mentionDAO: MentionDAO,val recetteDAO: RecetteDAO,val resultatDAO: ResultatDAO) : CommandLineRunner {
     override fun run(vararg args: String?) {
         //Pour importer les ingredients
         if (ingredientDAO.count() == 0L) { // Éviter les doublons
@@ -151,8 +148,71 @@ class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO:
             // Sauvegardez toutes les mentions
             mentionDAO.saveAll(mentions)
         }
+        if (recetteDAO.count() == 0L) {
+            val coco = ingredientDAO.findById(1).orElseThrow()
+            val olive = ingredientDAO.findById(2).orElseThrow()
 
 
+            val recette1 = Recette(
+                titre = "Savon Hydratant",
+                description = "Un savon doux et hydratant pour la peau sensible.",
+                surgraissage = 0.0f,
+                avecSoude = true,
+                concentrationAlcalin = 30.0f,
+                apportEnEau = 371.66663f,
+                qteAlcalin = 530.95233f,
+                ligneIngredients = mutableListOf(
+                    LigneIngredient(quantite = 500.0f, pourcentage = 50.0f, ingredient = coco),
+                    LigneIngredient(quantite = 500.0f, pourcentage = 50.0f, ingredient = olive)
+                )
+            )
 
-    }
+
+            val recette2 = Recette(
+                titre = "Savon Hydratant Reduction 2",
+                description = "Un savon doux et hydratant pour la peau sensible.",
+                surgraissage = 5.0f,
+                avecSoude = true,
+                concentrationAlcalin = 30.0f,
+                apportEnEau = 379.99997f,
+                qteAlcalin = 542.8571f,
+                ligneIngredients = mutableListOf(
+                    LigneIngredient(quantite = 250.0f, pourcentage = 25.0f, ingredient = olive),
+                    LigneIngredient(quantite = 750.0f, pourcentage = 75.0f, ingredient = coco)
+                )
+            )
+
+            recetteDAO.saveAll(listOf(recette1, recette2))
+
+            // Ajout des résultats pour chaque recette
+            val resultatsRecette1 = listOf(
+                Resultat(ResultatId(1, recette1.id!!), 43.5f, recette1, caracteristiqueDAO.findById(1).orElseThrow(), mentionDAO.findById(2).orElseThrow()),
+                Resultat(ResultatId(2, recette1.id!!), 179.5f, recette1, caracteristiqueDAO.findById(2).orElseThrow(), mentionDAO.findById(6).orElseThrow()),
+                Resultat(ResultatId(3, recette1.id!!), 8.503f, recette1, caracteristiqueDAO.findById(3).orElseThrow(), mentionDAO.findById(8).orElseThrow()),
+                Resultat(ResultatId(4, recette1.id!!), 12.327f, recette1, caracteristiqueDAO.findById(4).orElseThrow(), mentionDAO.findById(10).orElseThrow()),
+                Resultat(ResultatId(5, recette1.id!!), 11.582f, recette1, caracteristiqueDAO.findById(5).orElseThrow(), mentionDAO.findById(12).orElseThrow()),
+                Resultat(ResultatId(6, recette1.id!!), 9.356f, recette1, caracteristiqueDAO.findById(6).orElseThrow(), mentionDAO.findById(14).orElseThrow()),
+                Resultat(ResultatId(7, recette1.id!!), 9.767f, recette1, caracteristiqueDAO.findById(7).orElseThrow(), mentionDAO.findById(16).orElseThrow()),
+                Resultat(ResultatId(8, recette1.id!!), 10.251f, recette1, caracteristiqueDAO.findById(8).orElseThrow(), mentionDAO.findById(19).orElseThrow()),
+                Resultat(ResultatId(9, recette1.id!!), 11.037f, recette1, caracteristiqueDAO.findById(9).orElseThrow(), mentionDAO.findById(22).orElseThrow())
+            )
+
+            val resultatsRecette2 = listOf(
+                Resultat(ResultatId(1, recette2.id!!), 26.25f, recette2, caracteristiqueDAO.findById(1).orElseThrow(), mentionDAO.findById(1).orElseThrow()),
+                Resultat(ResultatId(2, recette2.id!!), 213.75f, recette2, caracteristiqueDAO.findById(2).orElseThrow(), null),
+                Resultat(ResultatId(3, recette2.id!!), 8.7314f, recette2, caracteristiqueDAO.findById(3).orElseThrow(), mentionDAO.findById(8).orElseThrow()),
+                Resultat(ResultatId(4, recette2.id!!), 12.5888f, recette2, caracteristiqueDAO.findById(4).orElseThrow(), mentionDAO.findById(10).orElseThrow()),
+                Resultat(ResultatId(5, recette2.id!!), 12.0169f, recette2, caracteristiqueDAO.findById(5).orElseThrow(), mentionDAO.findById(12).orElseThrow()),
+                Resultat(ResultatId(6, recette2.id!!), 9.9385f, recette2, caracteristiqueDAO.findById(6).orElseThrow(), mentionDAO.findById(14).orElseThrow()),
+                Resultat(ResultatId(7, recette2.id!!), 9.2902f, recette2, caracteristiqueDAO.findById(7).orElseThrow(), mentionDAO.findById(16).orElseThrow()),
+                Resultat(ResultatId(8, recette2.id!!), 10.8616f, recette2, caracteristiqueDAO.findById(8).orElseThrow(), mentionDAO.findById(19).orElseThrow()),
+                Resultat(ResultatId(9, recette2.id!!), 11.1703f, recette2, caracteristiqueDAO.findById(9).orElseThrow(), mentionDAO.findById(22).orElseThrow())
+            )
+
+            resultatDAO.saveAll(resultatsRecette1 + resultatsRecette2)
+        }
+
+
+        }
+
 }
