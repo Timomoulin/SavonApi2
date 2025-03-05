@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api-savon/v1/ingredients")
+@RequestMapping("/api-savon/v1/ingredient")
 class IngredientController (val ingredientDAO: IngredientDAO){
 
     @GetMapping
