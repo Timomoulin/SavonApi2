@@ -4,7 +4,7 @@ import org.ldv.savonapi.model.entity.LigneIngredient
 
 class RecetteFormDTO (
     var id: Long? = null,
-    var tite: String,
+    var titre: String,
     var description: String,
     var surgraissage: Float,
     var avecSoude: Boolean,
