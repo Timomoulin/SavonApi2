@@ -42,7 +42,7 @@
         "headers": [],
         "body": {
           "mode": "json",
-          "json": "{\n    \"id\": null,\n    \"tite\": \"Savon Hydratant Reduction\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
+          "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant Reduction\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
           "formUrlEncoded": [],
           "multipartForm": []
         },
@@ -73,7 +73,7 @@
         "headers": [],
         "body": {
           "mode": "json",
-          "json": "{\n    \"id\": null,\n    \"tite\": \"Savon Hydratant\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 0.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
+          "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 0.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
           "formUrlEncoded": [],
           "multipartForm": []
         },
@@ -104,7 +104,7 @@
         "headers": [],
         "body": {
           "mode": "json",
-          "json": "{\n    \"id\": null,\n    \"tite\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": -5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
+          "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": -5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
           "formUrlEncoded": [],
           "multipartForm": []
         },
@@ -135,7 +135,7 @@
         "headers": [],
         "body": {
           "mode": "json",
-          "json": "{\n    \"id\": 1,\n    \"tite\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}",
+          "json": "{\n    \"id\": 1,\n    \"titre\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}",
           "formUrlEncoded": [],
           "multipartForm": []
         },
